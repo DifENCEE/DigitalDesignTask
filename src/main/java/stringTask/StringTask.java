@@ -105,6 +105,18 @@ public class StringTask {
             System.err.println("Your string is empty!");
             return false;
         }
+        if (!isEqualBrackets(str)) {
+            System.err.println("The number of opening and closing brackets does not match!");
+            return false;
+        }
+        if (!isRegExValid(str)) {
+            System.err.println("Found invalid characters in string!");
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isEqualBrackets(String str) {
         char[] str1 = str.toCharArray();
         int openBracketsCount = 0;
         int closeBracketsCount = 0;
@@ -116,10 +128,10 @@ public class StringTask {
                 closeBracketsCount++;
             }
         }
-        if (openBracketsCount != closeBracketsCount) {
-            System.err.println("The number of opening and closing brackets does not match!");
-            return false;
-        }
+        return openBracketsCount == closeBracketsCount;
+    }
+
+    private static boolean isRegExValid(String str) {
         Pattern p = Pattern.compile("^[a-z0-9\\[\\]A-Z]+");
         Matcher m = p.matcher(str);
         return m.matches();
