@@ -83,13 +83,17 @@ public class StringTask {
     private static int lastBracketCount(char[] str1, int currentCharPos) {
         int openBracketsCount = 1;
         currentCharPos += 2;
-        while (openBracketsCount != 0) {
-            if (str1[currentCharPos] == '[') {
-                openBracketsCount++;
-            } else if (str1[currentCharPos] == ']') {
-                openBracketsCount--;
+        try {
+            while (openBracketsCount != 0) {
+                if (str1[currentCharPos] == '[') {
+                    openBracketsCount++;
+                } else if (str1[currentCharPos] == ']') {
+                    openBracketsCount--;
+                }
+                currentCharPos++;
             }
-            currentCharPos++;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("Missing brackets in front of number!\n" + e);
         }
         return currentCharPos - 1;
     }
